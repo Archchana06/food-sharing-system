@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard - ShareFood</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================
+           EXTREME BEAUTIFUL UI - DONOR DASHBOARD
+           GRID LAYOUT - 3 PER ROW
+           ============================================ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f4f0 0%, #d4edda 50%, #c8e6c9 100%);
+            min-height: 100vh;
+            padding-bottom: 3rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32, #388e3c);
+            padding: 0.8rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(27, 94, 32, 0.35);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+            border-radius: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #c8e6c9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        #userName {
+            color: #c8e6c9;
+            font-weight: 500;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        #userName i {
+            margin-right: 8px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #c8e6c9;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 60%;
+        }
+
+        /* ===== MAIN CONTAINERS ===== */
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== POST FOOD CARD ===== */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(27, 94, 32, 0.12);
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #4caf50, #2e7d32);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(27, 94, 32, 0.18);
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .card-title i {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+        }
+
+        .card-title .badge {
+            font-size: 0.8rem;
+            background: #e8f5e9;
+            padding: 2px 14px;
+            border-radius: 30px;
+            color: #2e7d32;
+            font-weight: 500;
+        }
+
+        /* ===== FORM STYLES ===== */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #4caf50;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8f5e9;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafffe;
+            color: #1b5e20;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 4px rgba(46,125,50,0.12);
+            background: white;
+        }
+
+        input::placeholder {
+            color: #a5d6a7;
+            font-weight: 300;
+        }
+
+        input[type="file"] {
+            padding: 12px;
+            border: 2px dashed #81c784;
+            background: #f1f8e9;
+            cursor: pointer;
+            border-radius: 16px;
+        }
+
+        input[type="file"]:hover {
+            background: #e8f5e9;
+            border-color: #2e7d32;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(46,125,50,0.3);
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(46,125,50,0.4);
+            background: linear-gradient(135deg, #1b5e20, #0d3b0f);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit i {
+            font-size: 1.2rem;
+        }
+
+        /* ===== MESSAGE STYLES ===== */
+        .message {
+            padding: 14px 20px;
+            border-radius: 16px;
+            display: none;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #1b5e20;
+            border-left-color: #2e7d32;
+            display: block;
+        }
+
+        .message.error {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            color: #b71c1c;
+            border-left-color: #c62828;
+            display: block;
+        }
+
+        /* ============================================
+           GRID LAYOUT - 3 PER ROW
+           ============================================ */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid rgba(46,125,50,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(46,125,50,0.12);
+            border-color: rgba(46,125,50,0.2);
+        }
+
+        .food-card .food-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .food-card .no-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #f5f5f5, #e8f5e9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            color: #81c784;
+            font-size: 2.5rem;
+        }
+
+  .food-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border: 1px solid rgba(46,125,50,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.food-card h3 {
+    color: #1b5e20;
+    font-size: 1.2rem;
+    margin-bottom: 12px;      /* ← Space after title */
+    font-weight: 600;
+}
+
+.food-card .food-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;                /* ← Space between each line */
+    font-size: 0.9rem;
+    color: #444;
+    margin: 10px 0 15px 0;    /* ← Space above and below */
+    flex: 1;
+}
+
+.food-card .food-details span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f0f5f0;  /* ← Light separator line */
+}
+
+.food-card .food-details i {
+    color: #2e7d32;
+    width: 22px;
+    font-size: 0.9rem;
+}
+
+.food-card .status-badge {
+    display: inline-block;
+    padding: 5px 16px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    align-self: flex-start;
+    margin: 8px 0 12px 0;     /* ← Space around status badge */
+}
+
+        .status-badge.available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-badge.reserved {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-badge.expired {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #ef5350, #c62828);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(198, 40, 40, 0.3);
+        }
+
+        .btn-delete i {
+            font-size: 0.9rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #888;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #a5d6a7;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .food-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .dashboard-container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .btn-submit {
+                font-size: 0.95rem;
+                padding: 14px;
+            }
+
+            #userName {
+                font-size: 0.8rem;
+                padding: 4px 12px;
+            }
+
+            .food-card .food-image {
+                height: 150px;
+            }
+        }
+
+        /* ===== SCROLL BAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e8f5e9;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="logo.png" alt="ShareFood Logo">
+                <span class="logo-text">ShareFood</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <span id="userName"><i class="fas fa-user-circle"></i> Welcome, <span id="userNameText"></span></span>
+            <a href="#" onclick="switchToSeeker()"><i class="fas fa-exchange-alt"></i> Switch to Seeker</a>
+            <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="dashboard-container">
+
+        <!-- ===== POST FOOD CARD ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-plus-circle"></i> Post New Food
+                <span class="badge"><i class="fas fa-utensils"></i> Share & Help</span>
+            </div>
+
+            <div id="postMessage" class="message"></div>
+
+            <form id="postFoodForm">
+                <div class="form-group">
+                    <label><i class="fas fa-utensils"></i> Food Name</label>
+                    <input type="text" id="food_name" placeholder="e.g., Pizza, Rice & Curry, Salad" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-weight"></i> Quantity</label>
+                    <input type="text" id="quantity" placeholder="e.g., 2 plates, 1 box, 5 pieces" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Pickup Location</label>
+                    <input type="text" id="location" placeholder="Enter address or landmark" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-clock"></i> Pickup Time</label>
+                    <input type="datetime-local" id="pickup_time" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-image"></i> Upload Image</label>
+                    <input type="file" id="food_image" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Post Food
+                </button>
+            </form>
+        </div>
+
+        <!-- ===== MY FOOD POSTS CARD - GRID 3 PER ROW ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-list-ul"></i> My Food Posts
+            </div>
+            <div id="myFoodList" class="food-grid"></div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Update username display
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('userNameText').textContent = user.name;
+        } else {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+</body>
+</html>

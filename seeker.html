@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seeker Dashboard - ShareFood</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ============================================
+           EXTREME BEAUTIFUL UI - SEEKER DASHBOARD
+           GRID LAYOUT - 3 PER ROW
+           ============================================ */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #e3f2fd 0%,
+          #bbdefb 50%,
+          #90caf9 100%
+        );
+        min-height: 100vh;
+        padding-bottom: 3rem;
+      }
+
+      /* ===== NAVIGATION ===== */
+      nav {
+        background: linear-gradient(135deg, #0d47a1, #1565c0, #1e88e5);
+        padding: 0.8rem 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 8px 32px rgba(13, 71, 161, 0.35);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      }
+
+      .logo-link {
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease;
+      }
+
+      .logo-link:hover {
+        transform: scale(1.05);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo img {
+        height: 45px;
+        width: auto;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+        border-radius: 10px;
+      }
+
+      .logo-text {
+        font-size: 1.6rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff, #90caf9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.8rem;
+        flex-wrap: wrap;
+      }
+
+      #userName {
+        color: #90caf9;
+        font-weight: 500;
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 6px 18px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      #userName i {
+        margin-right: 8px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        padding: 8px 16px;
+        border-radius: 30px;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: #90caf9;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-links a:hover::after {
+        width: 60%;
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        border-radius: 28px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 60px rgba(13, 71, 161, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1565c0, #42a5f5, #1565c0);
+        background-size: 200% 100%;
+        animation: gradientMove 3s ease-in-out infinite;
+      }
+
+      @keyframes gradientMove {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 80px rgba(13, 71, 161, 0.18);
+      }
+
+      .card-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #0d47a1;
+        margin-bottom: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .card-title i {
+        background: linear-gradient(135deg, #1565c0, #42a5f5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 1.8rem;
+      }
+
+      .card-title .badge {
+        font-size: 0.8rem;
+        background: #e3f2fd;
+        padding: 2px 14px;
+        border-radius: 30px;
+        color: #0d47a1;
+        font-weight: 500;
+      }
+
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .food-card {
+        background: white;
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(21, 101, 192, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .food-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(21, 101, 192, 0.12);
+        border-color: rgba(21, 101, 192, 0.2);
+      }
+
+      .food-card .food-image {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 16px;
+        margin-bottom: 12px;
+      }
+
+      .food-card .no-image {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(135deg, #f5f5f5, #e3f2fd);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        margin-bottom: 12px;
+        color: #64b5f6;
+        font-size: 2.5rem;
+      }
+
+      .food-card {
+        background: white;
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(46, 125, 50, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .food-card h3 {
+        color: #1b5e20;
+        font-size: 1.2rem;
+        margin-bottom: 12px; /* ← Space after title */
+        font-weight: 600;
+      }
+
+      .food-card .food-details {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* ← Space between each line */
+        font-size: 0.9rem;
+        color: #444;
+        margin: 10px 0 15px 0; /* ← Space above and below */
+        flex: 1;
+      }
+
+      .food-card .food-details span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 4px 0;
+        border-bottom: 1px solid #f0f5f0; /* ← Light separator line */
+      }
+
+      .food-card .food-details i {
+        color: #7d2e2e;
+        width: 22px;
+        font-size: 0.9rem;
+      }
+
+      .food-card .status-badge {
+        display: inline-block;
+        padding: 5px 16px;
+        border-radius: 30px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        align-self: flex-start;
+        margin: 8px 0 12px 0; /* ← Space around status badge */
+      }
+
+      .status-badge.available {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .status-badge.reserved {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .status-badge.expired {
+        background: #ffebee;
+        color: #c62828;
+      }
+
+      .btn-reserve {
+        background: linear-gradient(135deg, #1565c0, #0d47a1);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .btn-reserve:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(21, 101, 192, 0.3);
+        background: linear-gradient(135deg, #0d47a1, #0a3b7a);
+      }
+
+      .btn-reserve i {
+        font-size: 0.9rem;
+      }
+
+      .btn-reserve:disabled {
+        background: #b0bec5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #888;
+        grid-column: 1 / -1;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        color: #90caf9;
+        margin-bottom: 1rem;
+      }
+
+      .empty-state p {
+        font-size: 1rem;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1024px) {
+        .food-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+          gap: 15px;
+          padding: 1rem;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.8rem;
+        }
+
+        .card {
+          padding: 1.5rem;
+          border-radius: 20px;
+        }
+
+        .card-title {
+          font-size: 1.3rem;
+        }
+
+        .food-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+
+        .dashboard-container {
+          padding: 0 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .food-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .logo-text {
+          font-size: 1.2rem;
+        }
+
+        #userName {
+          font-size: 0.8rem;
+          padding: 4px 12px;
+        }
+
+        .food-card .food-image {
+          height: 150px;
+        }
+      }
+
+      /* ===== SCROLL BAR ===== */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #e3f2fd;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #1565c0, #42a5f5);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #0d47a1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+      <a href="index.html" class="logo-link">
+        <div class="logo">
+          <img src="logo.png" alt="ShareFood Logo" />
+          <span class="logo-text">ShareFood</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <span id="userName"
+          ><i class="fas fa-user-circle"></i> Welcome,
+          <span id="userNameText"></span
+        ></span>
+        <a href="#" onclick="switchToDonor()"
+          ><i class="fas fa-exchange-alt"></i> Switch to Donor</a
+        >
+        <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+        <a href="#" onclick="logout()"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </div>
+    </nav>
+
+    <div class="dashboard-container">
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-utensils"></i> Available Food Near You
+        </div>
+        <div id="foodList" class="food-grid"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-bookmark"></i> My Reservations
+          
+        </div>
+        <div id="myReservations" class="food-grid"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Update username display
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        document.getElementById("userNameText").textContent = user.name;
+      } else {
+        window.location.href = "login.html";
+      }
+    </script>
+  </body>
+</html>

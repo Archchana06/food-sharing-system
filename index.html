@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShareFood - Community Food Sharing</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(27, 94, 32, 0.92);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(27, 94, 32, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover {
+            transform: scale(1.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2));
+            border-radius: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #a5d6a7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 30px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a5d6a7, #ffffff);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 60%;
+        }
+
+        .nav-links .btn-nav {
+            background: linear-gradient(135deg, #ffffff, #e8f5e9);
+            color: #2e7d32 !important;
+            font-weight: 600;
+            padding: 8px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+
+        .nav-links .btn-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255,255,255,0.3);
+        }
+
+        .nav-links .btn-nav::after {
+            display: none;
+        }
+        /* ===== HERO SECTION WITH BLUR ===== */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+/* Background Image with Blur */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=1600') center/cover;
+    filter: blur(8px);
+    z-index: 0;
+    transform: scale(1.1);
+}
+
+/* Dark Overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Content above everything */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    animation: fadeUp 1s ease-out;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #a5d6a7;
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.hero .badge i {
+    margin-right: 8px;
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.2);
+}
+
+.hero h1 .highlight {
+    background: linear-gradient(135deg, #a5d6a7, #66bb6a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.hero .buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero .btn {
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero .btn-primary {
+    background: linear-gradient(135deg, #ffffff, #e8f5e9);
+    color: #2e7d32;
+    box-shadow: 0 8px 30px rgba(255,255,255,0.25);
+}
+
+.hero .btn-primary:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 50px rgba(255,255,255,0.35);
+}
+
+.hero .btn-secondary {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.hero .btn-secondary:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.4);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+}
+
+.hero .floating-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero .floating-stats .stat {
+    text-align: center;
+}
+
+.hero .floating-stats .stat .number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.hero .floating-stats .stat .label {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+}
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(27, 94, 32, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(46,125,50,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #66bb6a, #2e7d32);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .feature:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 80px rgba(27, 94, 32, 0.12);
+        }
+
+        .feature .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .feature h3 {
+            color: #1b5e20;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature p {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid #e8f5e9;
+        }
+
+        .footer .heart {
+            color: #e53935;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 3rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .floating-stats {
+                gap: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .hero .floating-stats .stat .number {
+                font-size: 1.6rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                padding: 3rem 1.5rem;
+                gap: 1.5rem;
+            }
+
+            .feature {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .btn {
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #e8f5e9;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2e7d32, #66bb6a);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="logo.png" alt="ShareFood Logo">
+                <span class="logo-text">ShareFood</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+            <a href="register.html" class="btn-nav"><i class="fas fa-user-plus"></i> Get Started</a>
+            <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                <i class="fas fa-seedling"></i> Join the Food Sharing Community
+            </div>
+
+            <h1>
+                Share <span class="highlight">Extra Food</span>.<br>
+                Help Your <span class="highlight">Community</span>.<br>
+                Reduce <span class="highlight">Waste</span>.
+            </h1>
+
+            <p>
+                Join thousands of people sharing food instead of wasting it. 
+                Together, we can make a difference — one meal at a time.
+            </p>
+
+            <div class="buttons">
+                <a href="register.html" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i> Get Started
+                </a>
+                <a href="login.html" class="btn btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </div>
+
+            <div class="floating-stats">
+                <div class="stat">
+                    <div class="number">1.3B+</div>
+                    <div class="label">Food Saved (kg)</div>
+                </div>
+                <div class="stat">
+                    <div class="number">50K+</div>
+                    <div class="label">Happy Members</div>
+                </div>
+                <div class="stat">
+                    <div class="number">100+</div>
+                    <div class="label">Cities Worldwide</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features">
+        <div class="feature">
+            <span class="icon">📢</span>
+            <h3>Post Food</h3>
+            <p>Have extra food? Share it with someone who needs it. Every meal counts.</p>
+        </div>
+        <div class="feature">
+            <span class="icon">🔍</span>
+            <h3>Find Food</h3>
+            <p>Browse available food near your location and claim what you need.</p>
+        </div>
+        <div class="feature">
+            <span class="icon">🤝</span>
+            <h3>Help Community</h3>
+            <p>Reduce waste, fight hunger, and build a stronger, kinder community.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <p>
+            Made with <span class="heart">❤️</span> by <strong>Archchana Vijayanathan</strong> &bull; 
+            <i class="fas fa-cloud"></i> Powered by Microsoft Azure
+        </p>
+        <p style="margin-top: 6px; font-size: 0.8rem; color: #bbb;">
+            &copy; 2026 ShareFood. All rights reserved.
+        </p>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
